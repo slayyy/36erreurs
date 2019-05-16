@@ -7,7 +7,7 @@ class Nominee{
   const TABLE_NAME = "ce16_nominee";
 
   public static function getById($pdo, $id){
-    $q = $pdo->prepare('SELECT * FROM '.self::TABLE_NAME.' WHERE nominee_id = :id');
+    $q = $pdo->prepare('SELECT * FROM '.self::TABLE_NAME.' WHERE nominee_id = ?');
     $q->bindParam('nominee_id',$id);
     $q->fetch();
     return $q->fetchAll(\PDO::FETCH_CLASS, "\\Models\\Nominee");

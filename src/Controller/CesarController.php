@@ -11,12 +11,13 @@ class CesarController{
     $pdo = Connexion::getInstance();
     $winners = \Model\Nominee::getWinners($pdo);
 
-    $bestplayers = User::getBest($pdo);
+    $bestplayers = \Model\User::getBest($pdo);
 
     $categories = [];
     foreach ($winners as $winner) {
       $categories[$winner['category_id']] = Category::getById($pdo, $winner['category_id']);
     }
+
     include "./winners.php";
   }
 }
