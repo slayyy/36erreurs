@@ -1,6 +1,7 @@
 <?php 
 namespace Model;
 
+
 class Nominee{
 
   const TABLE_NAME = "ce16_nominee";
@@ -8,10 +9,11 @@ class Nominee{
   public static function getById($pdo, $id){
     $q = $pdo->prepare('SELECT * FROM '.self::TABLE_NAME.' WHERE nominee_id = :id');
     $q->bindParam('nominee_id',$id);
-    return $q->fetch();
+    $q->fetch();
+    return $q->fetchAll(\PDO::FETCH_CLASS, "\\Models\\Nominee");
   }
 
-  public static function getWinners(){
+  public static function getWinners($pdo){
     $q = $pdo->prepare('SELECT * FROM '.self::TABLE_NAME.' WHERE winner = 1');
     $winners = $q->execute();
     return $q->fetchAll();
